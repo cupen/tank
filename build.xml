@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Console-Tank" basedir="">
+<property name="LIB_DIR" value="lib"/>
+	<target name="build">
+		<exec executable="gcc">
+			<arg line="tank.c"/>
+			<arg line="bullet.c"/>
+			<arg line="lancher.c"/>
+			<arg line="boom.c"/>
+			<arg line="drawImp.c"/>
+			<arg line="operateHitEvent.c"/>
+			<arg line="-L ${LIB_DIR}"/>
+			<arg line="-l pcc32"/>
+			<arg line="-o Console-Tank.exe"/>
+		</exec>
+	</target>
+</project>
