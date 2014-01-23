@@ -1,8 +1,20 @@
 # Console-Tank  
-It just was a half-finished and mini project.
+It just for fun.
 
-# Build  
-ant build
+# Screenshort 
+![screenshort](screenshot.png)
+
+# The build environment
+* MinGW
+
+# run
+make run
 
 # LICENCE  
-WTFPL
+<a href="http://www.wtfpl.net/">
+	<img 
+		src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png"
+		width="88" 
+		height="31" 
+		alt="WTFPL" />
+</a>
