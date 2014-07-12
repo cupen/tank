@@ -13,9 +13,30 @@
 #include "draw.h"
 
 
-
 void
-move_body(Body* body){
+move_body(Body* body, Dir dir){
+	body->dir = dir;
+	switch(dir){
+	case UP:
+		body->y -= body->speed;
+		break;
+
+	case DOWN:
+		body->y += body->speed;
+		break;
+
+	case LEFT:
+		body->x -= body->speed;
+		break;
+
+	case RIGHT:
+		body->y += body->speed;
+		break;
+
+	default:
+
+		break;
+	}
 	return;
 }
 
@@ -27,6 +48,7 @@ create_body(){
 	body->w = 0;
 	body->h = 0;
 	body->live = 0;
+	body->speed = 1;
 	body->dir = 0;
 	body->drawable = 0;
 	return body;
@@ -38,7 +60,7 @@ free_body(Body* body){
 }
 
 void
-draw_body(Body* body){
+draw_body(const Body* body){
 	int blockCount = body->w * body->h;
 	char show[16] = {};
 
@@ -59,21 +81,16 @@ draw_body(Body* body){
 
 inline static int
 _is_point_in_rectangle(int pointX, int pointY, int rectX, int rectY, int rectW, int rectH){
-	if( pointX <= rectX && pointY <= rectY ){
-		return 0;
-
-	} else if( pointX >= (rectX + rectW)
-				&& pointY >= (rectY + rectH)){
-		return 0;
-
-	} else {
-		return 1;
-
-	}
+	return (
+		pointX >= rectX
+		&& pointX <= (rectX + rectW)
+		&& pointY >= rectY
+		&& pointY <= (rectY + rectH)
+	);
 }
 
 int
-is_body_hited(Body* body1, Body* body2){
+is_body_hited(const Body* body1, const Body* body2){
 	return _is_point_in_rectangle(
 				body1->x,
 				body1->y,

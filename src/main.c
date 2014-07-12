@@ -1,47 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "draw.h"
 #include "body.h"
+#include "tank.h"
+
+
+#include <ncurses.h>
 
 
 #define ENEMY_COUNT         4                 // 敌方数量
 #define BULLET_COUNT        ENEMY_COUNT*3+3 // 子弹总数- 敌方&玩家
 //#define INPUT_ARRAY_LENGH   16
 
-int isRunning = 1;
-
-//////////////////////////////////////////////////////
-//			基本设置
-//////////////////////////////////////////////////////
 void
-initialize(){
-
+start_game(){
+	start_draw();
 }
 
-//void
-//getInput(){
-//    if(kbhit())
-//    return;
-//}
+void
+end_game(){
+	getch();
+	end_draw();
+}
+
+void
+do_game(){
+	Tank* tank = create_tank(0, 1, UP);
+	draw_tank(tank);
+	draw_text_at("██", RED, 13, 25);
+	draw_text_at("是啊", RED, 13, 13);
+	refresh_draw();
+}
 
 int
 main(void){
-	start_draw();
-
-	Body* body = create_body();
-	body->w = 3;
-	body->h = 3;
-	body->drawable = 0b101111010;
-	draw_body(body);
-//	draw_text_at("██", RED, 13, 13);
-	draw_text_at("是啊", RED, 13, 13);
-	refresh_draw();
-	getch();
-	end_draw();
+	start_game();
+	do_game();
+	end_game();
     return 0;
 }
 
-#include <ncurses.h>
+
 
 int main1()
 {       int ch;

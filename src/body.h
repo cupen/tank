@@ -18,11 +18,12 @@ typedef enum{
 } Dir;
 
 typedef struct{
-	uint8_t live;
-	uint8_t x;
-	uint8_t y;
-	uint8_t w;
-	uint8_t h;
+	int live;
+	int x;
+	int y;
+	int w;
+	int h;
+	int speed;
 	Color color;
 	Dir dir;
 	uint64_t drawable;
@@ -33,11 +34,11 @@ extern "C"
 {
 #endif
 
-	void move_body(Body* body);
+	void move_body(Body* body, Dir dir);
 	Body* create_body(void);
 	void free_body(Body* body);
-	void draw_body(Body* body);
-	int is_body_hited(Body* body1, Body* body2);
+	void draw_body(const Body* body);
+	int is_body_hited(const Body* body1, const  Body* body2);
 
 #ifdef __cplusplus
 extern "C"
