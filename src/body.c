@@ -41,7 +41,7 @@ move_body(Body* body, Dir dir){
 }
 
 Body*
-create_body(){
+create_body(long drawable){
 	Body* body = (Body*)malloc(sizeof(Body));
 	body->x = 0;
 	body->y = 0;
@@ -50,7 +50,10 @@ create_body(){
 	body->live = 0;
 	body->speed = 1;
 	body->dir = 0;
-	body->drawable = 0;
+	body->drawable[UP] = drawable;
+	body->drawable[DOWN] = drawable;
+	body->drawable[LEFT] = drawable;
+	body->drawable[RIGHT] = drawable;
 	return body;
 }
 
@@ -62,15 +65,12 @@ free_body(Body* body){
 void
 draw_body(const Body* body){
 	int blockCount = body->w * body->h;
-	char show[16] = {};
-
-	int blockForDraw = body->drawable;
+	int blockForDraw = body->drawable[body->dir];
 	while(blockCount--){
-		for(int i = 0; i < body->w; i++){
-			for(int j = 0; j < body->h; j++){
+		for(int hInc = body->h - 1; hInc >= 0; hInc--){
+			for(int wInc = body->w - 1; wInc >= 0; wInc--){
 				if (blockForDraw & 0x1){
-					draw_text_at("■", RED, body->x + i, body->y + j);
-//					draw_text_at("#", RED, body->x + i, body->y + j);
+					draw_text_at("██",RED, body->x + wInc, body->y + hInc);
 				}
 				blockForDraw >>= 1;
 			}

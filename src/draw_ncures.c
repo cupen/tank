@@ -33,13 +33,15 @@ end_draw(){
 
 void
 draw_text(char* text, Color color){
-
 	printw(text);
 }
 
 void
 draw_text_at(char* text, Color color, int x, int y){
-	move(x,y);
+	move(y, x * 2);
+	draw_text(text, RED);
+//	getch();
+	move(y + 1, x * 2 + 10);
 	draw_text(text, RED);
 }
 
